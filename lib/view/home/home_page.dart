@@ -12,15 +12,22 @@ class HomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           // crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Row(children: [
-
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+              ElevatedButton(
+                onPressed: () {
+                  Get.toNamed("/count");
+                },
+                child: const Text("Counting"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Get.toNamed("/manage");
+                },
+                child: const Text("Management System"),
+              ),
             ],),
-            ElevatedButton(
-              onPressed: () {
-                Get.toNamed("/count");
-              },
-              child: Text("Counting"),
-            ),
           ],
         ),
       ),
