@@ -34,3 +34,23 @@ samples, guidance on mobile development, and a full API reference.
 
 https://github.com/user-attachments/assets/61a54218-32e7-479b-ac5f-4416e2592b6c
 
+###
+<h1></h1>
+<h3 align="center"><i>CRUD OPERATION FOR EMPLOYEE MANAGEMENT SYSTEM USING GETX</i></h3>
+<h1></h1>
+<div align="center">
+<img src="https://github.com/Prafulpatnecha/advance_flutter_ch2/blob/master/img1.png" height=450px hspace=20>
+<img src="https://github.com/Prafulpatnecha/advance_flutter_ch2/blob/master/img2.png" height=450px hspace=20>
+<img src="https://github.com/Prafulpatnecha/advance_flutter_ch2/blob/master/img3.png" height=450px hspace=20>
+
+</div>
+
+<h1></h1>
+<div align="center">
+<a href="https://github.com/Prafulpatnecha/advance_flutter_ch2/tree/master/lib/view/management_system">-> Code File Link <-</a>
+</div>
+<h1></h1>
+
+
+https://github.com/user-attachments/assets/e68c9a40-77cf-4ee2-9a98-f3384c1802cd
+
