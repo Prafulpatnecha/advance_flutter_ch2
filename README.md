@@ -54,3 +54,24 @@ https://github.com/user-attachments/assets/61a54218-32e7-479b-ac5f-4416e2592b6c
 
 https://github.com/user-attachments/assets/e68c9a40-77cf-4ee2-9a98-f3384c1802cd
 
+###
+<h1></h1>
+<h3 align="center"><i>18.1 SQL Queries</i></h3>
+
+
+### • Field names: id, name, role, salary, age, address, phone. And Add a new employee with all the details.
+
+```bash
+INSERT INTO employee (name,age,role,salary,phone) VALUES ("admin",20,"Manager",50000,9635518229);
+```
+
+<h1></h1>
+<div align="center">
+<img src="https://github.com/user-attachments/assets/055ab43e-3b01-492a-a729-c47bd2c78672" height=450px hspace=20>
+</div>
+
+<h1></h1>
+
+
+
+
