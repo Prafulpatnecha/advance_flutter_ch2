@@ -75,17 +75,98 @@ INSERT INTO employee (name,age,role,salary,phone) VALUES ("admin",20,"Manager",5
 ### • Add multiple employees with selective data:
 
 ```bash
-INSERT INTO employee (name,age,role,salary,phone) VALUES ("admin",35,"Manager",50000,9635518229);
+INSERT INTO employee (name,age,role,salary,phone) VALUES ("admin",21,"Employee",40000,9635518222);
 INSERT INTO employee (name,age,role,salary,phone) VALUES ("adom",23,"Employee",30000,1234567891);
-INSERT INTO employee (name,age,role,salary,phone) VALUES ("admin",20,"Employee",20000,9876543210);
+INSERT INTO employee (name,age,role,salary,phone) VALUES ("sky",20,"Employee",20000,9876543210);
 ```
 <h1></h1>
 <div align="center">
-<img src="https://github.com/user-attachments/assets/a06a663a-5669-4136-b0e7-083e880a2043">
+<img src="https://github.com/user-attachments/assets/4d546c1f-0ace-438e-809e-7bc777d07a64">
 </div>
 
 <h1></h1>
 
 
+### • Retrieve all employee information:
+
+```bash
+SELECT * FROM employee;
+```
+
+<h1></h1>
+<div align="center">
+<img src="https://github.com/user-attachments/assets/ed4ab14e-4e42-46b2-a937-c57eb35b8e70">
+</div>
+
+<h1></h1>
+
+### • Get specific columns for all employees (e.g., name, salary).
+
+```bash
+SELECT * FROM employee WHERE name = "sky";
+```
+```bash
+SELECT * FROM employee WHERE salary > 20000;
+```
+
+<h1></h1>
+<div align="center">
+<img src="https://github.com/user-attachments/assets/a1e832e4-0a75-45fe-a10f-765ed07a7631">
+</div>
+
+<h1></h1>
 
 
+### • Find employees with a particular role (e.g., Manager).
+
+```bash
+SELECT * FROM employee WHERE role = "Manager"
+```
+```bash
+SELECT * FROM employee WHERE role = "Employee"
+```
+
+<h1></h1>
+<div align="center">
+<img src="https://github.com/user-attachments/assets/e4e2c01c-f081-4cbd-b73e-4a8b6f9a1ec4">
+</div>
+
+<h1></h1>
+
+
+### • Search for employees with names containing "An" (case-insensitive):
+
+```bash
+SELECT * FROM employee WHERE LOWER(name) like "%an%"
+```
+
+
+### • Find employees older than 30 and earning more than $70,000:
+
+```bash
+SELECT * FROM employee WHERE age > 30 AND salary > 70000
+```
+
+### • Change the salary of an employee with ID 100:
+
+```bash
+UPDATE employee SET salary = 20000 WHERE id = 100;
+```
+
+### • Update the address for employees in the 'Sales' role:
+
+```bash
+UPDATE employee SET address = "ANY Place" WHERE role = "Sales";
+```
+
+### • Remove an employee with ID 101:
+
+```bash
+DELETE FROM employees WHERE id = 101;
+```
+
+### • Delete all employees under 20 (assuming it's not a valid age).
+
+```bash
+DELETE FROM employees WHERE age < 20;
+```
