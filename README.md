@@ -67,7 +67,21 @@ INSERT INTO employee (name,age,role,salary,phone) VALUES ("admin",20,"Manager",5
 
 <h1></h1>
 <div align="center">
-<img src="https://github.com/user-attachments/assets/055ab43e-3b01-492a-a729-c47bd2c78672" height=450px hspace=20>
+<img src="https://github.com/user-attachments/assets/055ab43e-3b01-492a-a729-c47bd2c78672">
+</div>
+
+<h1></h1>
+
+### • Add multiple employees with selective data:
+
+```bash
+INSERT INTO employee (name,age,role,salary,phone) VALUES ("admin",35,"Manager",50000,9635518229);
+INSERT INTO employee (name,age,role,salary,phone) VALUES ("adom",23,"Employee",30000,1234567891);
+INSERT INTO employee (name,age,role,salary,phone) VALUES ("admin",20,"Employee",20000,9876543210);
+```
+<h1></h1>
+<div align="center">
+<img src="https://github.com/user-attachments/assets/a06a663a-5669-4136-b0e7-083e880a2043">
 </div>
 
 <h1></h1>
