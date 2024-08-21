@@ -9,7 +9,7 @@ class DbHelper {
   Database? _db;
   
   Future get database async => _db ?? await initDatabase();
-  
+  //Todo Create
   Future<Database?> initDatabase() async {
     final path = await getDatabasesPath();
     final dbPath = join(path, "finance.db");
@@ -28,6 +28,7 @@ class DbHelper {
     );
     return _db;
   }
+  //Todo Insert
   Future<void> insertData({required double amount,required double isIncome,required String category})
   async {
     Database? db = await database;
@@ -38,6 +39,7 @@ class DbHelper {
     ''';
     await db!.rawInsert(sql);
   }
+  // TODO Delete
   Future<void> deleteData()
   async {
     Database? db = await database;

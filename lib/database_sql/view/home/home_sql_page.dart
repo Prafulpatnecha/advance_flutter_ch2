@@ -1,9 +1,8 @@
-import 'dart:ffi';
+
 
 import 'package:advance_flutter_ch2/database_sql/contoller/sql_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 class HomeSqlPage extends StatelessWidget {
   const HomeSqlPage({super.key});
