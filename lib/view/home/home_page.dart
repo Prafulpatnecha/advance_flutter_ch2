@@ -28,6 +28,12 @@ class HomePage extends StatelessWidget {
                 child: const Text("Management System"),
               ),
             ],),
+              ElevatedButton(
+                onPressed: () {
+                  Get.toNamed("/finance");
+                },
+                child: const Text("Finance Button"),
+              ),
           ],
         ),
       ),

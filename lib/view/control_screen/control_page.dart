@@ -1,3 +1,4 @@
+import 'package:advance_flutter_ch2/database_sql/view/home/home_sql_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,6 +17,7 @@ class MyAppControl extends StatelessWidget {
         GetPage(name: '/', page: () => const HomePage(),transition: Transition.cupertino),
         GetPage(name: '/count', page: () => const CountPage(),transition: Transition.rightToLeftWithFade),
         GetPage(name: '/manage', page: () => const HomeManage(),transition: Transition.leftToRightWithFade),
+        GetPage(name: '/finance', page: () => const HomeSqlPage(),transition: Transition.topLevel),
       ],
     );
   }
