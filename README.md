@@ -178,6 +178,7 @@ DELETE FROM employees WHERE age < 20;
 <img src="https://github.com/user-attachments/assets/844f418a-4d48-495d-ac85-79996c5a6d83">
 
 </div>
+
 ```bash
 static DbHelper dbHelper = DbHelper._();
   DbHelper._();
@@ -224,7 +225,10 @@ static DbHelper dbHelper = DbHelper._();
     ''';
     await db!.rawDelete(sql);
   }
-  ```
+```
+
+
+
 
 
 <h1></h1>
