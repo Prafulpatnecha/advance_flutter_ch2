@@ -170,3 +170,18 @@ DELETE FROM employees WHERE id = 101;
 ```bash
 DELETE FROM employees WHERE age < 20;
 ```
+
+###
+<h1></h1>
+<div align="center">
+<img src="https://github.com/Prafulpatnecha/advance_flutter_ch2/blob/master/imageSQL1.png" height=450px hspace=20>
+<img src="https://github.com/user-attachments/assets/844f418a-4d48-495d-ac85-79996c5a6d83">
+
+</div>
+
+
+<h1></h1>
+<div align="center">
+<a href="https://github.com/Prafulpatnecha/advance_flutter_ch2/tree/master/lib/database_sql">-> Code File Link <-</a>
+</div>
+<h1></h1>
