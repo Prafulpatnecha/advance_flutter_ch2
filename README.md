@@ -170,3 +170,69 @@ DELETE FROM employees WHERE id = 101;
 ```bash
 DELETE FROM employees WHERE age < 20;
 ```
+
+###
+<h1></h1>
+<div align="center">
+<img src="https://github.com/Prafulpatnecha/advance_flutter_ch2/blob/master/imageSQL1.png" height=450px hspace=20>
+<img src="https://github.com/user-attachments/assets/844f418a-4d48-495d-ac85-79996c5a6d83">
+
+</div>
+
+```bash
+static DbHelper dbHelper = DbHelper._();
+  DbHelper._();
+  
+  Database? _db;
+  
+  Future get database async => _db ?? await initDatabase();
+  //Todo Create
+  Future<Database?> initDatabase() async {
+    final path = await getDatabasesPath();
+    final dbPath = join(path, "finance.db");
+    _db = await openDatabase(
+      dbPath,
+      version: 1,
+      onCreate: (db, version) async {
+        String sql = '''CREATE TABLE finance(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        amount REAL NOT NULL ,
+        isIncome INTEGER NOT NULL,
+        category TEXT
+        );''';
+        await db.execute(sql);
+      },
+    );
+    return _db;
+  }
+  //Todo Insert
+  Future<void> insertData({required double amount,required double isIncome,required String category})
+  async {
+    Database? db = await database;
+    String sql='''
+    INSERT INTO finance(
+    amount ,isIncome,category
+    ) VALUES ($amount,$isIncome,"$category");
+    ''';
+    await db!.rawInsert(sql);
+  }
+  // TODO Delete
+  Future<void> deleteData()
+  async {
+    Database? db = await database;
+    String sql='''
+    DELETE FROM finance
+    ''';
+    await db!.rawDelete(sql);
+  }
+```
+
+
+
+
+
+<h1></h1>
+<div align="center">
+<a href="https://github.com/Prafulpatnecha/advance_flutter_ch2/tree/master/lib/database_sql">-> Code File Link <-</a>
+</div>
+<h1></h1>
