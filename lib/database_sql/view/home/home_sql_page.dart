@@ -1,5 +1,3 @@
-
-
 import 'package:advance_flutter_ch2/database_sql/contoller/sql_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,63 +12,393 @@ class HomeSqlPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("DataBase For SQLITE"),
       ),
-      body: const Center(),
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        TextEditingController txtAmount = TextEditingController();
-        TextEditingController txtIsIncome = TextEditingController();
-        TextEditingController txtCategory = TextEditingController();
-        showDialog(context: context, builder: (context) {
-          return AlertDialog(
-            title: const Text("DataBase Report"),
-            content: Container(
-              height: 150,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    buildTextFormField(txtCategory,TextInputType.text,"Category"),
-                    const SizedBox(height: 5,),
-                    buildTextFormField(txtAmount,TextInputType.number,"Amount"),
-                    const SizedBox(height: 5,),
-                    buildTextFormField(txtIsIncome,TextInputType.number,"Income"),
-                  ],
+      body: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Obx(
+                () =>Text("Income Total :${sqlController.incomeTotal}")
+              ),
+
+              Obx(
+                () => Text("Income Total :${sqlController.total}"),
+              )
+            ],
+          ),
+          Expanded(
+            child: Obx(
+              () => ListView.builder(
+                itemCount: sqlController.data.length,
+                itemBuilder: (context, index) => Card(
+                  color: sqlController.data[index]["isIncome"] == 1
+                      ? Colors.green.shade100
+                      : Colors.red.shade200,
+                  child: ListTile(
+                    leading: Text(sqlController.data[index]["id"].toString()),
+                    subtitle: Text("\$ "+sqlController.data[index]["amount"].toString()),
+                    title: Text(sqlController.data[index]["category"]
+                        .toString()
+                        .capitalizeFirst
+                        .toString()),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  title: const Text("Edit And Update"),
+                                  content: Container(
+                                    height: 150,
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            ElevatedButton(
+                                                onPressed: () {
+                                                  TextEditingController txtAmount =
+                                                      TextEditingController();
+                                                  TextEditingController txtCategory =
+                                                      TextEditingController();
+                                                  showDialog(
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return AlertDialog(
+                                                        title: const Text("Amount Edit"),
+                                                        content:
+                                                            editAmount(txtAmount,TextInputType.number,"Amount"),
+                                                        actions: [
+                                                          buildMaterialButtonEdit(
+                                                              sqlController,
+                                                              index,
+                                                              txtAmount,
+                                                              txtCategory,sqlController.backBool.value,0),
+                                                          MaterialButton(
+                                                            onPressed: () {
+                                                              Get.back();
+                                                            },
+                                                            child:
+                                                                const Text("Cancel"),
+                                                          ),
+                                                        ],
+                                                      );
+                                                    },
+                                                  );
+                                                  if(sqlController.backBool.value)
+                                                    {
+                                                      sqlController.backBool.value=false;
+                                                      Get.back();
+                                                    }
+                                                },
+                                                child: const Text("Amount")),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            ElevatedButton(
+                                                onPressed: () {
+                                                  TextEditingController txtAmount =
+                                                  TextEditingController();
+                                                  TextEditingController txtCategory =
+                                                  TextEditingController();
+                                                  showDialog(
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return AlertDialog(
+                                                        title: const Text("Category Edit"),
+                                                        content:
+                                                        editAmount(txtCategory,TextInputType.text,"Category"),
+                                                        actions: [
+                                                          buildMaterialButtonEdit(
+                                                              sqlController,
+                                                              index,
+                                                              txtAmount,
+                                                              txtCategory,sqlController.backBool.value,1),
+                                                          MaterialButton(
+                                                            onPressed: () {
+                                                              Get.back();
+                                                            },
+                                                            child:
+                                                            const Text("Cancel"),
+                                                          ),
+                                                        ],
+                                                      );
+                                                    },
+                                                  );
+                                                  if(sqlController.backBool.value)
+                                                  {
+                                                    sqlController.backBool.value=false;
+                                                    Get.back();
+                                                  }
+                                                },
+                                                child: const Text("Category")),
+                                          ],
+                                        ),
+                                        ElevatedButton(
+                                            onPressed: () {
+                                              TextEditingController txtAmount =
+                                              TextEditingController();
+                                              TextEditingController txtCategory =
+                                              TextEditingController();
+                                              showDialog(
+                                                context: context,
+                                                builder: (context) {
+                                                  return AlertDialog(
+                                                    title: const Text("Category Edit"),
+                                                    content:Obx(
+                                                      () => SwitchListTile(value: sqlController.incomeBool.value, onChanged: (value) {
+                                                        sqlController.getIncome(value);
+                                                      },title: const Text("Income/Expanse"),),
+                                                    )
+                                                    ,
+                                                    actions: [
+                                                      buildMaterialButtonEdit(
+                                                          sqlController,
+                                                          index,
+                                                          txtAmount,
+                                                          txtCategory,sqlController.backBool.value,2),
+                                                      MaterialButton(
+                                                        onPressed: () {
+                                                          sqlController.incomeBool.value=false;
+                                                          Get.back();
+                                                        },
+                                                        child:
+                                                        const Text("Cancel"),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                              if(sqlController.backBool.value)
+                                              {
+                                                sqlController.backBool.value=false;
+                                                Get.back();
+                                              }
+                                            },
+                                            child: const Text("Income/Expanse")),
+                                        ElevatedButton(
+                                            onPressed: () {
+                                              TextEditingController txtAmount =
+                                              TextEditingController();
+                                              TextEditingController txtCategory =
+                                              TextEditingController();
+                                              showDialog(
+                                                context: context,
+                                                builder: (context) {
+                                                  return AlertDialog(
+                                                    title: const Text("Category Edit"),
+                                                    content:Container(
+                                                      height: 150,
+                                                      child: SingleChildScrollView(
+                                                        child: Column(
+                                                          children: [
+                                                            editAmount(txtAmount,TextInputType.number,"Amount"),
+                                                            SizedBox(height: 10,),
+                                                            editAmount(txtCategory,TextInputType.text,"Category"),
+                                                            Obx(
+                                                                  () => SwitchListTile(value: sqlController.incomeBool.value, onChanged: (value) {
+                                                                sqlController.getIncome(value);
+                                                              },title: const Text("Income/Expanse"),),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    )
+                                                    ,
+                                                    actions: [
+                                                      buildMaterialButtonEdit(
+                                                          sqlController,
+                                                          index,
+                                                          txtAmount,
+                                                          txtCategory,sqlController.backBool.value,3),
+                                                      MaterialButton(
+                                                        onPressed: () {
+                                                          sqlController.incomeBool.value=false;
+                                                          Get.back();
+                                                        },
+                                                        child:
+                                                        const Text("Cancel"),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                              if(sqlController.backBool.value)
+                                              {
+                                                sqlController.backBool.value=false;
+                                                Get.back();
+                                              }
+                                            },
+                                            child: const Text("All Record Update")),
+                                      ],
+                                    ),
+                                  ),
+                                  actions: [
+                                    MaterialButton(
+                                      onPressed: () {
+                                        Get.back();
+                                      },
+                                      child: const Text("Cancel"),
+                                    )
+                                  ],
+                                ),
+                              );
+                            },
+                            icon: const Icon(Icons.edit)),
+                        IconButton(
+                            onPressed: () {
+                              sqlController.deleteRecord(
+                                  id: int.parse(
+                                      sqlController.data[index]['id'].toString()));
+                            },
+                            icon: const Icon(Icons.delete)),
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ),
-            actions: [
-              MaterialButton(onPressed: () {
-                if(txtIsIncome.text=="")
-                  {
-                    txtIsIncome.text="0";
-                  }
-                if(txtCategory.text.isNotEmpty && txtAmount.text.isNotEmpty)
-                  {
-                    sqlController.insertRecord(amount: double.parse(txtAmount.text), category: txtCategory.text, isIncome: double.parse(txtIsIncome.text));
-                  }
-                else{
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Value most be Filled!!!")));
-                }
-                Navigator.of(context).pop();
-              },child: const Text("Save"),),
-              MaterialButton(onPressed: () {
-                Navigator.of(context).pop();
-              },child: const Text("Cancel"),),
-            ],
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          TextEditingController txtAmount = TextEditingController();
+          TextEditingController txtCategory = TextEditingController();
+          showDialog(
+            context: context,
+            builder: (context) {
+              return buildAlertDialog(
+                  txtCategory, txtAmount, sqlController, context);
+            },
           );
-        },);
-      },child: const Icon(Icons.play_arrow_outlined),),
+        },
+        child: const Icon(Icons.play_arrow_outlined),
+      ),
     );
   }
 
-  TextFormField buildTextFormField(TextEditingController txtController,TextInputType inputType,String labelName) {
+  MaterialButton buildMaterialButtonEdit(SqlController sqlController, int index,
+      TextEditingController txtAmount, TextEditingController txtCategory,bool backBool,int changeValue) {
+    return MaterialButton(
+      onPressed: () {
+        int income = 0;
+        if (sqlController.incomeBool.value) {
+          income = 1;
+        } else {
+          income = 0;
+        }
+        sqlController.updateRecord(
+            changeValue: changeValue,
+            id: int.parse(sqlController.data[index]['id'].toString()),
+                amount: (changeValue!=2 && changeValue!=1)?double.parse(txtAmount.text.toString()):0,
+            category: txtCategory.text,
+            isIncome: income);
+        sqlController.incomeBool.value=false;
+        backBool=true;
+        Get.back();
+      },
+      child: const Text("Save"),
+    );
+  }
+
+  TextField editAmount(TextEditingController txtAmount,TextInputType textInput,String lableValue) {
+    return TextField(
+      controller: txtAmount,
+      keyboardType: textInput,
+      decoration: InputDecoration(
+          label: Text(lableValue),
+          border:
+              const OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+          focusedBorder:
+              const OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+          enabledBorder:
+              const OutlineInputBorder(borderSide: BorderSide(color: Colors.black))),
+    );
+  }
+
+  AlertDialog buildAlertDialog(
+      TextEditingController txtCategory,
+      TextEditingController txtAmount,
+      SqlController sqlController,
+      BuildContext context) {
+    return AlertDialog(
+      title: const Text("DataBase Report"),
+      content: Container(
+        height: 150,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              buildTextFormField(txtCategory, TextInputType.text, "Category"),
+              const SizedBox(
+                height: 5,
+              ),
+              buildTextFormField(txtAmount, TextInputType.number, "Amount"),
+              const SizedBox(
+                height: 5,
+              ),
+              Obx(
+                () => SwitchListTile(
+                  value: sqlController.incomeBool.value,
+                  onChanged: (value) {
+                    sqlController.getIncome(value);
+                  },
+                  title: const Text("Income/Expanse"),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+      actions: [
+        MaterialButton(
+          onPressed: () {
+            int income = 0;
+            if (sqlController.incomeBool.value) {
+              income = 1;
+            } else {
+              income = 0;
+            }
+            if (txtCategory.text.isNotEmpty && txtAmount.text.isNotEmpty) {
+              sqlController.insertRecord(
+                  amount: double.parse(txtAmount.text),
+                  category: txtCategory.text,
+                  isIncome: double.parse(income.toString()));
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Value most be Filled!!!")));
+            }
+            sqlController.incomeBool.value = false;
+            Navigator.of(context).pop();
+          },
+          child: const Text("Save"),
+        ),
+        MaterialButton(
+          onPressed: () {
+            sqlController.incomeBool.value = false;
+            Navigator.of(context).pop();
+          },
+          child: const Text("Cancel"),
+        ),
+      ],
+    );
+  }
+
+  TextFormField buildTextFormField(TextEditingController txtController,
+      TextInputType inputType, String labelName) {
     return TextFormField(
-                  keyboardType: inputType,
-                  controller: txtController,
-                  decoration: InputDecoration(
-                    label: Text(labelName),
-                    border: const OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                    enabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                    focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                    ),
-                );
+      keyboardType: inputType,
+      controller: txtController,
+      decoration: InputDecoration(
+        label: Text(labelName),
+        border: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.black)),
+        enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.black)),
+        focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.black)),
+      ),
+    );
   }
 }
