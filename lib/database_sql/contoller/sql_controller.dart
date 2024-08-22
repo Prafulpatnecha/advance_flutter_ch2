@@ -47,6 +47,7 @@ class SqlController extends GetxController{
             incomeTotal.value=incomeTotal.value+data[i]["amount"];
         }
       }
+    update();
     return data;
   }
   //todo update
