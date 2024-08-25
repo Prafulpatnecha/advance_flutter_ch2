@@ -22,7 +22,6 @@ class HomeSqlPage extends StatelessWidget {
                 Obx(
                   () =>Text("Income Total : ${sqlController.incomeTotal}")
                 ),
-
                 Obx(
                   () => Text("Expanse Total : ${sqlController.total}"),
                 )

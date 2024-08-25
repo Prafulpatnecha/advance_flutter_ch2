@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:advance_flutter_ch2/database_sql/sql_helper/sql_home_helper.dart';
 import 'package:get/get.dart';
 
 class SqlController extends GetxController{
 
   RxList data=[].obs;
+  Rx<File>? imageFile;
   RxBool incomeBool=false.obs;
   RxBool backBool=false.obs;
   RxDouble total= 0.0.obs;
@@ -26,9 +29,9 @@ class SqlController extends GetxController{
      DbHelper.dbHelper.database;
      getRecord();
   }
-  Future<void> insertRecord({required double amount,required double isIncome,required String category})
+  Future<void> insertRecord({required double amount,required double isIncome,required String category,required String image})
   async {
-    await DbHelper.dbHelper.insertData(amount: amount, isIncome: isIncome, category: category);
+    await DbHelper.dbHelper.insertData(amount: amount, isIncome: isIncome, category: category, image: image);
     getRecord();
   }
 
@@ -57,9 +60,9 @@ class SqlController extends GetxController{
       required int id,
       required double amount,
       required String category,
-      required int isIncome})
+      required int isIncome,required String image})
   async {
-    await DbHelper.dbHelper.updateData(changeValue, id, amount, category, isIncome);
+    await DbHelper.dbHelper.updateData(changeValue, id, amount, category, isIncome,image);
     getRecord();
   }
   Future<void> deleteRecord({required int id})
