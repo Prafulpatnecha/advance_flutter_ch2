@@ -42,6 +42,17 @@ class DbHelper {
     return await db!.rawQuery(sql);
   }
 
+  //TODO Read
+  Future<List<Map<String, Object?>>> readIncomeData(int isIncome)
+  async {
+    Database? db = await database;
+    String sql ='''
+    SELECT * FROM finance WHERE isIncome = ?
+    ''';
+    List args = [isIncome];
+    return await db!.rawQuery(sql,args);
+  }
+
   //Todo Insert
   Future<void> insertData(
       {required double amount,

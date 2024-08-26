@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:advance_flutter_ch2/database_sql/sql_helper/sql_home_helper.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class SqlController extends GetxController{
 
@@ -12,10 +13,17 @@ class SqlController extends GetxController{
   RxDouble total= 0.0.obs;
   RxDouble incomeTotal= 0.0.obs;
 
+  void imagePick(XFile image)
+  {
+    imageFile = File(image.path).obs;
+    update();
+  }
   void getIncome(bool value)
   {
     incomeBool.value=value;
   }
+
+
   @override
   void onInit()
   {
@@ -29,10 +37,16 @@ class SqlController extends GetxController{
      DbHelper.dbHelper.database;
      getRecord();
   }
+
   Future<void> insertRecord({required double amount,required double isIncome,required String category,required String image})
   async {
     await DbHelper.dbHelper.insertData(amount: amount, isIncome: isIncome, category: category, image: image);
     getRecord();
+  }
+
+  Future<void> readIncomeRecord(int isIncome)
+  async {
+    data.value = await DbHelper.dbHelper.readIncomeData(isIncome);
   }
 
   Future<RxList> getRecord()
