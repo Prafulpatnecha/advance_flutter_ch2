@@ -13,6 +13,7 @@ class SqlController extends GetxController{
   RxDouble total= 0.0.obs;
   RxDouble incomeTotal= 0.0.obs;
 
+
   void imagePick(XFile image)
   {
     imageFile = File(image.path).obs;
@@ -48,7 +49,10 @@ class SqlController extends GetxController{
   async {
     data.value = await DbHelper.dbHelper.readIncomeData(isIncome);
   }
-
+  Future<void> recordFind(String category)
+  async {
+    data.value = await DbHelper.dbHelper.readFind(category);
+  }
   Future<RxList> getRecord()
   async {
     data.value= await DbHelper.dbHelper.readData();

@@ -1,19 +1,34 @@
 import 'dart:io';
 
-import 'package:advance_flutter_ch2/database_sql/contoller/sql_controller.dart';
+import 'package:advance_flutter_ch2/database_sql/controller/sql_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 class HomeSqlPage extends StatelessWidget {
   const HomeSqlPage({super.key});
-
   @override
   Widget build(BuildContext context) {
+  TextEditingController txtController =TextEditingController();
     SqlController sqlController = Get.put(SqlController());
     return Scaffold(
       appBar: AppBar(
         title: const Text("DataBase For SQLITE"),
+        bottom: PreferredSize(preferredSize: Size.fromHeight(70), child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: TextField(
+            controller: txtController,
+            onChanged: (value) {
+              sqlController.recordFind(value);
+            },
+            decoration: InputDecoration(
+              hintText: "Search",
+              border: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black))
+            ),
+          ),
+        ),),
       ),
       body: GetBuilder<SqlController>(
         builder: (controller) => Column(
@@ -35,7 +50,6 @@ class HomeSqlPage extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     sqlController.readIncomeRecord(0);
-
                   },
                   child: Card(
                     color: Colors.red.shade200,

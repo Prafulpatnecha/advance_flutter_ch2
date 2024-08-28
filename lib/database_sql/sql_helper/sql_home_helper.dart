@@ -52,7 +52,12 @@ class DbHelper {
     List args = [isIncome];
     return await db!.rawQuery(sql,args);
   }
-
+  Future<List<Map<String, Object?>>> readFind(String category)
+  async {
+    Database? db = await database;
+    String sql = "SELECT * FROM finance WHERE category LIKE '%$category%'";
+    return await db!.rawQuery(sql);
+  }
   //Todo Insert
   Future<void> insertData(
       {required double amount,
